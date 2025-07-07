@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Сторінка зі стулками</title>
+  <style>
+    body {
+      background: #f7f7f7;
+      font-family: Arial, sans-serif;
+    }
+    .container {
+      width: 600px;
+      margin: 40px auto;
+      background: #fff;
+      padding: 30px 0;
+      box-shadow: 0 0 10px #ccc;
+      text-align: center;
+    }
+    .doors {
+      position: relative;
+      width: 500px;
+      height: 150px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .door {
+      width: 48%;
+      height: 100%;
+      background: #8b2b5b;
+      margin: 0 1%;
+      border: 3px solid #6b1e44;
+      box-sizing: border-box;
+      transition: 
+        transform 2s cubic-bezier(0.4,0,0.2,1),
+        box-shadow 0.3s;
+      z-index: 2;
+    }
+    .door.left {
+      border-right: none;
+      transform-origin: left center;
+    }
+    .door.right {
+      border-left: none;
+      transform-origin: right center;
+    }
+    .doors.open .door.left {
+      transform: perspective(600px) rotateY(-30deg);
+      box-shadow: -10px 0 30px #aaa;
+    }
+    .doors.open .door.right {
+      transform: perspective(600px) rotateY(30deg);
+      box-shadow: 10px 0 30px #aaa;
+    }
+    .hidden-text {
+      position: absolute;
+      width: 100%;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      font-size: 2em;
+      font-weight: bold;
+      color: #222;
+      opacity: 0;
+      transition: opacity 0.5s;
+      z-index: 1;
+      pointer-events: none;
+    }
+    .doors.open .hidden-text {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="doors" id="doors">
+      <div class="door left"></div>
+      <div class="door right"></div>
+      <div class="hidden-text">HELLO</div>
+    </div>
+  </div>
+  <script>
+    const doors = document.getElementById('doors');
+    doors.addEventListener('mouseenter', () => {
+      doors.classList.add('open');
+    });
+    doors.addEventListener('mouseleave', () => {
+      doors.classList.remove('open');
+    });
+  </script>
+</body>
+</html>
